@@ -1,11 +1,12 @@
 import { ChildProcess, SpawnOptions } from 'child_process';
 import spawn from 'cross-spawn';
+import which from 'which';
 import debug from 'debug';
 import fs from 'fs';
 import { IGpgKey } from '../stores/GpgKeyStore';
 import GpgError from './GpgError';
 
-const log = debug('ezgpg:gpg');
+const log = debug('lokki:gpg');
 
 type SpawnFunction = (
   command: string,
@@ -27,12 +28,15 @@ export default class Gpg {
     private spawnFn: SpawnFunction = defaultSpawnFn
   ) {}
 
-  public detectExecutablePath(): string | null {
-    for (const pathOption of ['/usr/local/bin/gpg', '/usr/bin/gpg']) {
-      if (this.setExecutablePath(pathOption)) {
-        log('Using detected path "%s" for gpg', pathOption);
+  public async detectExecutablePath(): Promise<string | null> {
+    try {
+      const gpgPath = await which('gpg');
+      if (this.setExecutablePath(gpgPath)) {
+        log('Using detected path "%s" for gpg', gpgPath);
         return this.gpgPath;
       }
+    } catch (error) {
+      log('Could not find gpg in path');
     }
 
     return null;

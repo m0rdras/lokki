@@ -8,14 +8,14 @@ import { GpgError } from './GpgError';
 
 jest.mock('fs');
 
-const ezGpgKeyId = '058CAFED420D6BEEF71B844EBD76DEAD02758394';
+const lokkiKeyId = '058CAFED420D6BEEF71B844EBD76DEAD02758394';
 const izzyGpgKeyId = 'DEADBEEF420D6BEEF71B844EBD76DEAD02758394';
 const listKeysOutput = `
-/Users/ezgpg/.gnupg/pubring.gpg
+/Users/lokki/.gnupg/pubring.gpg
 ---------------------------------
 pub   rsa4096 2019-07-31 [SC]
-      ${ezGpgKeyId}
-uid           [ unknown] ezgpg
+      ${lokkiKeyId}
+uid           [ unknown] lokki
 sub   rsa4096 2019-07-31 [E]
 
 pub   rsa4096 2020-07-31 [SC]
@@ -196,8 +196,8 @@ describe('Gpg', () => {
         await expect(result).resolves.toEqual([
           {
             email: undefined,
-            id: ezGpgKeyId,
-            name: 'ezgpg',
+            id: lokkiKeyId,
+            name: 'lokki',
           },
           {
             email: 'izzy@dev.local',
@@ -210,7 +210,7 @@ describe('Gpg', () => {
 
     describe('encrypt', () => {
       it('should encrypt a message to a single recipient', async () => {
-        const result = gpg.encrypt('secret', [ezGpgKeyId]);
+        const result = gpg.encrypt('secret', [lokkiKeyId]);
         stdoutStream.push('encrypted');
 
         await expect(result).resolves.toEqual('encrypted');
@@ -222,11 +222,11 @@ describe('Gpg', () => {
           '--trust-model',
           'always',
           '-r',
-          ezGpgKeyId,
+          lokkiKeyId,
         ]);
       });
       it('should encrypt a message to a multiple recipients', async () => {
-        const result = gpg.encrypt('secret', [ezGpgKeyId, izzyGpgKeyId]);
+        const result = gpg.encrypt('secret', [lokkiKeyId, izzyGpgKeyId]);
         stdoutStream.push('encrypted');
 
         await expect(result).resolves.toEqual('encrypted');
@@ -238,7 +238,7 @@ describe('Gpg', () => {
           '--trust-model',
           'always',
           '-r',
-          ezGpgKeyId,
+          lokkiKeyId,
           '-r',
           izzyGpgKeyId,
         ]);

@@ -8,7 +8,7 @@ import { CryptStore } from './CryptStore';
 import { GpgKeyStore } from './GpgKeyStore';
 import { SettingsStore } from './SettingsStore';
 
-const log = debug('ezgpg:rootStore');
+const log = debug('lokki:rootStore');
 
 export const RootStore = types
   .model('RootStore', {
@@ -67,7 +67,7 @@ export default function createRootStore(ipc = ipcRenderer): IRootStore {
       selectedKeys: [],
     },
     settingsStore: {
-      gpgPath: '/usr/local/bin/gpg',
+      gpgPath: 'gpg',
     },
   };
   const deps = { ipcRenderer: ipc };

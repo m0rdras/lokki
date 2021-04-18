@@ -6,7 +6,7 @@ import { createGlobalStyle } from 'styled-components';
 import Root from './components/Root';
 import createRootStore from './stores/RootStore';
 
-const log = debug('ezgpg:main');
+const log = debug('lokki:main');
 
 const rootStore = createRootStore();
 

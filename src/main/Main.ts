@@ -15,7 +15,7 @@ import {
 import { Settings } from '../stores/SettingsStore';
 import Gpg from './Gpg';
 
-const log = debug('ezgpg:main');
+const log = debug('lokki:main');
 
 const MIGRATIONS: Migrations<Settings> = {
   '1.1.2': (store) => {

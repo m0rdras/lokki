@@ -11,8 +11,8 @@
     "package": "rm -rf src/dist && yarn build && electron-builder build --publish never",
     "postinstall": "node -r @babel/register .erb/scripts/CheckNativeDep.js && electron-builder install-app-deps && yarn cross-env NODE_ENV=development webpack --config ./.erb/configs/webpack.config.renderer.dev.dll.babel.js && opencollective-postinstall && yarn-deduplicate yarn.lock",
     "start": "node -r @babel/register ./.erb/scripts/CheckPortInUse.js && yarn start:renderer",
-    "start:main": "cross-env NODE_ENV=development electron -r ./.erb/scripts/BabelRegister ./src/main.dev.ts",
-    "start:renderer": "cross-env NODE_ENV=development webpack serve --config ./.erb/configs/webpack.config.renderer.dev.babel.js",
+    "start:main": "cross-env NODE_ENV=development DEBUG='lokki:*' electron -r ./.erb/scripts/BabelRegister ./src/main.dev.ts",
+    "start:renderer": "cross-env NODE_ENV=development DEBUG='lokki:*' webpack serve --config ./.erb/configs/webpack.config.renderer.dev.babel.js",
     "test": "jest"
   },
   "lint-staged": {
@@ -159,6 +159,7 @@
     "@teamsupercell/typings-for-css-modules-loader": "^2.4.0",
     "@testing-library/jest-dom": "^5.11.6",
     "@testing-library/react": "^11.2.2",
+    "@types/debug": "^4.1.5",
     "@types/enzyme": "^3.10.5",
     "@types/enzyme-adapter-react-16": "^1.0.6",
     "@types/history": "4.7.6",
@@ -232,6 +233,7 @@
     "yarn-deduplicate": "^3.1.0"
   },
   "dependencies": {
+    "debug": "^4.3.1",
     "electron-debug": "^3.1.0",
     "electron-log": "^4.2.4",
     "electron-store": "^7.0.3",
@@ -247,7 +249,8 @@
     "semantic-ui-css": "^2.4.1",
     "semantic-ui-react": "^2.0.3",
     "source-map-support": "^0.5.19",
-    "styled-components": "^5.2.3"
+    "styled-components": "^5.2.3",
+    "which": "^2.0.2"
   },
   "devEngines": {
     "node": ">=10.x",

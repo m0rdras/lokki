@@ -7,7 +7,7 @@ import { Button, Form, Message } from 'semantic-ui-react';
 import { ISettingsStore } from '../stores/SettingsStore';
 import PathInput from './PathInput';
 
-const log = debug('ezgpg:SettingsPage');
+const log = debug('lokki:SettingsPage');
 const { access } = fs.promises;
 
 interface SettingsStoreProps {

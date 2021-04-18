@@ -3,7 +3,7 @@ import { flow, getEnv, Instance, types } from 'mobx-state-tree';
 
 import { DeleteKeyResponse, Events } from '../Constants';
 
-const log = debug('ezgpg:gpgKeyStore');
+const log = debug('lokki:gpgKeyStore');
 
 export const GpgKey = types.model('GpgKey', {
   email: types.maybe(types.string),
