@@ -13,7 +13,7 @@ export const SettingsStore = types
   })
   .actions((self) => {
     const loadSettings = (settings: Settings) => {
-      if (settings?.gpgPath) {
+      if (typeof settings?.gpgPath === 'string') {
         self.gpgPath = settings.gpgPath;
       }
     };

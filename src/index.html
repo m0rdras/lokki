@@ -5,21 +5,13 @@
     <title>Lokki 🔓</title>
     <script>
       (() => {
-        if (process?.env?.NODE_ENV !== 'development') {
-          const link = document.createElement('link');
-          link.rel = 'stylesheet';
-          link.href = './dist/style.css';
-          // HACK: Writing the script path should be done with webpack
-          document.getElementsByTagName('head')[0].appendChild(link);
-        }
+        const link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.href = './dist/style.css';
+        // HACK: Writing the script path should be done with webpack
+        document.getElementsByTagName('head')[0].appendChild(link);
       })();
     </script>
-    <!-- TODO: styles are only applied when loaded from the CDN ?!? -->
-    <link
-      async
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/semantic-ui@2.0.3/dist/semantic.min.css"
-    />
   </head>
   <body>
     <div id="root"></div>

@@ -31,7 +31,6 @@ const GlobalStyle = createGlobalStyle`
     }
 
     body {
-        font: caption;
         margin: 0;
     }
     .app {

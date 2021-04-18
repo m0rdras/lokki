@@ -4,7 +4,7 @@ import fs from 'fs';
 import { Readable, Writable } from 'stream';
 
 import Gpg from './Gpg';
-import { GpgError } from './GpgError';
+import GpgError from './GpgError';
 
 jest.mock('fs');
 
@@ -127,7 +127,7 @@ describe('Gpg', () => {
     ) => void;
 
     beforeEach(() => {
-      const spawnFn = (command: string, args?: readonly string[]) => {
+      const spawnFn = (_: string, args?: readonly string[]) => {
         closeHandler = undefined;
         exitCode = 0;
         gpgArgs = args;
