@@ -1,6 +1,5 @@
 import { observer } from 'mobx-react-lite';
 import React from 'react';
-// import { hot } from 'react-hot-loader';
 import { MemoryRouter as Router, Route, Switch } from 'react-router-dom';
 import { Container, Segment } from 'semantic-ui-react';
 import styled, { keyframes } from 'styled-components';
