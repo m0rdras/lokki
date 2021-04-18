@@ -72,7 +72,7 @@ export default class Main {
   }
 
   async onDeleteKey(
-    event: IpcMainInvokeEvent,
+    _: IpcMainInvokeEvent,
     keyId: string
   ): Promise<DeleteKeyResponse> {
     try {
@@ -84,7 +84,7 @@ export default class Main {
   }
 
   async onImportKey(
-    event: IpcMainInvokeEvent,
+    _: IpcMainInvokeEvent,
     key: string
   ): Promise<ImportKeyResponse> {
     try {
@@ -96,7 +96,7 @@ export default class Main {
   }
 
   async onRequestCrypt(
-    event: IpcMainInvokeEvent,
+    _: IpcMainInvokeEvent,
     { text, recipients }: CryptRequest
   ): Promise<CryptResponse> {
     if (Gpg.isEncrypted(text)) {
@@ -119,7 +119,7 @@ export default class Main {
   }
 
   onSaveSettings(
-    event: IpcMainInvokeEvent,
+    _: IpcMainInvokeEvent,
     settings: Settings
   ): SaveSettingsResponse {
     try {

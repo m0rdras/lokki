@@ -1,51 +1,52 @@
-import React from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import icon from '../assets/icon.svg';
-import './App.global.css';
+import debug from 'debug';
+import { onSnapshot } from 'mobx-state-tree';
+import * as React from 'react';
+import { createGlobalStyle } from 'styled-components';
 
-const Hello = () => {
-  return (
-    <div>
-      <div className="Hello">
-        <img width="200px" alt="icon" src={icon} />
-      </div>
-      <h1>electron-react-boilerplate</h1>
-      <div className="Hello">
-        <a
-          href="https://electron-react-boilerplate.js.org/"
-          target="_blank"
-          rel="noreferrer"
-        >
-          <button type="button">
-            <span role="img" aria-label="books">
-              📚
-            </span>
-            Read our docs
-          </button>
-        </a>
-        <a
-          href="https://github.com/sponsors/electron-react-boilerplate"
-          target="_blank"
-          rel="noreferrer"
-        >
-          <button type="button">
-            <span role="img" aria-label="books">
-              🙏
-            </span>
-            Donate
-          </button>
-        </a>
-      </div>
-    </div>
-  );
-};
+import Root from './components/Root';
+import createRootStore from './stores/RootStore';
 
-export default function App() {
-  return (
-    <Router>
-      <Switch>
-        <Route path="/" component={Hello} />
-      </Switch>
-    </Router>
-  );
+const log = debug('ezgpg:main');
+
+const rootStore = createRootStore();
+
+log('Created root store %O', rootStore);
+
+rootStore.load();
+
+if (process.env.NODE_ENV === 'development') {
+  onSnapshot(rootStore, (snapshot) => {
+    log('New state snapshot: %O', snapshot);
+  });
 }
+
+const GlobalStyle = createGlobalStyle`
+    html,
+    body {
+        height: 100%;
+    }
+
+    html {
+        box-sizing: border-box;
+    }
+
+    body {
+        font: caption;
+        margin: 0;
+    }
+    .app {
+        -webkit-user-select: none;
+        height: 100%;
+        position: relative;
+        overflow: hidden;
+    }
+`;
+
+const App = () => (
+  <>
+    <GlobalStyle />
+    <Root store={rootStore} />
+  </>
+);
+
+export default App;

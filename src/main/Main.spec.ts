@@ -5,7 +5,7 @@ import { Events } from '../Constants';
 import Gpg from './Gpg';
 import Main from './Main';
 import { Settings } from '../stores/SettingsStore';
-import { GpgError } from './GpgError';
+import GpgError from './GpgError';
 
 jest.mock('electron-store');
 jest.mock('./Gpg');

@@ -1,9 +1,7 @@
-import Electron from 'electron';
+import { dialog } from 'electron';
 import { observer } from 'mobx-react-lite';
 import React from 'react';
 import { Button, Form, Input } from 'semantic-ui-react';
-
-const { dialog } = Electron.remote;
 
 interface PathInputProps {
   path: string;
